@@ -1,8 +1,8 @@
 # Gunakan image Node.js versi 18 (atau 16+)
 FROM node:18-slim
 
-# Install ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+# Install ffmpeg and build tools required for native modules like bcrypt
+RUN apt-get update && apt-get install -y ffmpeg build-essential python3 && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -23,4 +23,4 @@ RUN mkdir -p db logs public/uploads/videos public/uploads/thumbnails
 EXPOSE 7575
 
 # Jalankan aplikasi
-CMD ["npm", "start"] 
+CMD ["npm", "start"]
